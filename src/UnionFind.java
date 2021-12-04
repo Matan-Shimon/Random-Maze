@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class UnionFind {
     private int num_of_vertices;
     private int [] rank; // rank of each cell
-    private int [] parent; // parent of each cell
+    public int [] parent; // parent of each cell
 
     // constructor
     public UnionFind(int num_of_vertices) {
@@ -46,6 +46,9 @@ public class UnionFind {
                 this.rank[parent1]++;
             }
         }
+    }
+    public void setParent(int child, int parent) {
+        this.parent[child] = parent;
     }
     // checking if two cell indexes has same parent
     public boolean sameParent(int cell_index1, int cell_index2) {

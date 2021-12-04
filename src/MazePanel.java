@@ -33,64 +33,27 @@ public class MazePanel extends JPanel implements Scrollable{
         graphics.setColor(Color.white);
         this.randomMaze.shuffleEdges();
         this.randomMaze.showEdges();
-        // printing the lines that we can go through
+        // printing the walls (the ones you can't go through them)
         for (int i = 0; i < this.randomMaze.edges.size(); i++) {
             if (this.randomMaze.edges.get(i).getAppear()) {
                 int x1 = this.randomMaze.edges.get(i).getSource().getX() * this.line_size;
                 int y1 = this.randomMaze.edges.get(i).getSource().getY() * this.line_size;
                 int x2 = this.randomMaze.edges.get(i).getDest().getX() * this.line_size;
                 int y2 = this.randomMaze.edges.get(i).getDest().getY() * this.line_size;
-                if (x1 != x2) {
-                    int diff = x2 - x1;
-                    diff /= 10;
-                    for (int j = 0; j < 5; j++) {
-                        graphics.drawLine(x1+50, y1+50, x1+50+diff, y2+50);
-                        x1 += 2*diff;
-                    }
-                }
-                else {
-                    int diff = y2 - y1;
-                    diff /= 10;
-                    for (int j = 0; j < 5; j++) {
-                        graphics.drawLine(x1+50, y1+50, x2+50, y1+50+diff);
-                        y1 += 2*diff;
-                    }
-                }
+                graphics.drawLine(x1+340, y1+50, x2+340, y2+50);
             }
         }
-        // printing the other lines (the ones you can't go through them)
-        for (int i = 0; i < this.randomMaze.edges.size(); i++) {
-            if (!this.randomMaze.edges.get(i).getAppear()) {
-                int x1 = this.randomMaze.edges.get(i).getSource().getX() * this.line_size;
-                int y1 = this.randomMaze.edges.get(i).getSource().getY() * this.line_size;
-                int x2 = this.randomMaze.edges.get(i).getDest().getX() * this.line_size;
-                int y2 = this.randomMaze.edges.get(i).getDest().getY() * this.line_size;
-                graphics.drawLine(x1+50, y1+50, x2+50, y2+50);
-            }
-        }
-        // printing the cells
-        for (int i = 0; i < this.randomMaze.edges.size(); i++) {
-            int x1 = this.randomMaze.edges.get(i).getSource().getX() * this.line_size;
-            int y1 = this.randomMaze.edges.get(i).getSource().getY() * this.line_size;
-            int x2 = this.randomMaze.edges.get(i).getDest().getX() * this.line_size;
-            int y2 = this.randomMaze.edges.get(i).getDest().getY() * this.line_size;
-            if (x1 == 0 && y1 == 0) {
-                graphics.setColor(Color.GREEN);
-                graphics.fillOval(x1+50, y1+50, 5, 5);
-                graphics.setColor(Color.white);
-            }
-            else {
-                graphics.fillOval(x1+50, y1+50, 5, 5);
-            }
-            if (x2 == (this.randomMaze.getNumOfColumns()-1)*this.line_size && y2 == (this.randomMaze.getNumOfRows()-1)*this.line_size) {
-                graphics.setColor(Color.RED);
-                graphics.fillOval(x2+50, y2+50, 5, 5);
-                graphics.setColor(Color.white);
-            }
-            else {
-                graphics.fillOval(x2+50, y2+50, 5, 5);
-            }
-        }
+        // print start and finish edges
+        // start
+        graphics.setColor(Color.green);
+        graphics.drawLine(0+340, 0+50, 0+340, this.line_size+50);
+        //  finish
+        graphics.setColor(Color.red);
+        int x1 = (this.number_of_columns-1) * this.line_size;
+        int y1 = (this.number_of_rows-2) * this.line_size;
+        int x2 = (this.number_of_columns-1) * this.line_size;
+        int y2 = (this.number_of_rows-1) * this.line_size;
+        graphics.drawLine(x1+340, y1+50, x2+340, y2+50);
     }
     @Override
     public Dimension getPreferredScrollableViewportSize() {

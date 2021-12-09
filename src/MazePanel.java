@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class MazePanel extends JPanel implements Scrollable{
+public class MazePanel extends JPanel {
     public RandomMaze randomMaze;
     private int number_of_rows;
     private int number_of_columns;
@@ -54,25 +54,5 @@ public class MazePanel extends JPanel implements Scrollable{
         int x2 = (this.number_of_columns-1) * this.line_size;
         int y2 = (this.number_of_rows-1) * this.line_size;
         graphics.drawLine(x1+340, y1+50, x2+340, y2+50);
-    }
-    @Override
-    public Dimension getPreferredScrollableViewportSize() {
-        return new Dimension(512, 256);
-    }
-    @Override
-    public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
-        return 128;
-    }
-    @Override
-    public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
-        return 128;
-    }
-    @Override
-    public boolean getScrollableTracksViewportWidth() {
-        return getPreferredSize().width <= getParent().getSize().width;
-    }
-    @Override
-    public boolean getScrollableTracksViewportHeight() {
-        return getPreferredSize().height <= getParent().getSize().height;
     }
 }
